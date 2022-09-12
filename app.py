@@ -30,7 +30,7 @@ sent = st.text_area("Prompt", default_value, height = 300)
 max_length = st.sidebar.slider("Max Length", min_value = 500, max_value=3000)
 temperature = st.sidebar.slider("Temperature", value = 1.0, min_value = 0.0, max_value=1.0, step=0.05)
 
-input_ids = tokenizer(default_value, return_tensors="pt").input_ids.to(device)
+input_ids = tokenizer(sent, return_tensors="pt").input_ids.to(device)
 output_sequences = infer(input_ids, max_length, temperature)
 generated_ids = model.generate(output_sequences)
 generated_text = tokenizer.decode(input_ids[0])
