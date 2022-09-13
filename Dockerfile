@@ -14,10 +14,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN git clone https://github.com/nelis-tech/codegen.git
     
-RUN conda create --name my_env python=3.9 -y \
-    conda activate my_env \
-    pip install streamlit \
-    pip install torch \
+RUN pip install torch \
     pip install datasets \
     pip install accelerate \
     pip install sentencepiece \
