@@ -6,7 +6,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 #Load model
-model, tokenizer = load_model()
+device, model, tokenizer = load_model()
 
 
 def infer(input_ids, max_length, temperature):
