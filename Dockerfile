@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/nelis-tech/codegen.git .
+RUN git clone https://github.com/nelis-tech/codegen-2.git .
     
 RUN pip3 install streamlit \
     pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116 \
