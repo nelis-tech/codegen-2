@@ -18,21 +18,24 @@ def infer(input_ids, max_length, temperature):
     )
 
     return output_sequences
-default_value = """Instruction: 
-Answer:"""
 
-#prompts
+
+
+#Prompts
 st.title("Generate code with the GPT codegen 🦄")
-st.subheader("This machine learning model is trained on 16 billion parameters and it generates code, you can give in a instruction as a prompt")
-st.button("GENERATE CODE", on_click=st.write)
+st.subheader("This machine learning model is trained on 16 billion parameters and it generates code, you can give in a instruction as a prompt and don't fill in the answer")
 
-sent = st.text_area("Prompt", default_value, height = 300)
+default_value = st.text_area("Prompt", height = 300)
 max_length = st.sidebar.slider("Max Length", min_value = 500, max_value=3000)
 temperature = st.sidebar.slider("Temperature", value = 1.0, min_value = 0.0, max_value=1.0, step=0.05)
 
-input_ids = tokenizer(sent, return_tensors="pt").input_ids.to(device)
-output_sequences = infer(input_ids, max_length, temperature)
-generated_ids = model.generate(output_sequences)
-generated_text = tokenizer.decode(input_ids[0])
+#Generate
+input_ids = tokenizer(default_value, return_tensors="pt").input_ids.to(device)
+output_sequences = infer(input_ids, max_length, temperature, default_value)
+generated_ids = model.generate(input_ids, output_sequences)
+generated_text = tokenizer.decode(generated_ids[0])
 
-st.write(print(generated_text))
+st.button("GENERATE CODE", on_click=generated_text)
+
+st.text(generated_text)
+print(generated_text)
