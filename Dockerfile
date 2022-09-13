@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-RUN git clone 
+RUN git clone https://github.com/nelis-tech/codegen.git
     
 RUN conda create --name my_env python=3.9 -y \
     conda activate my_env \
