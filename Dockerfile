@@ -12,12 +12,13 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/nelis-tech/codegen.git
+RUN git clone https://github.com/nelis-tech/codegen.git .
     
-RUN pip install torch \
+RUN pip3 install streamlit \
+    pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu116 \
     pip install datasets \
     pip install accelerate \
     pip install sentencepiece \
-    pip install git+https://github.com/huggingface/transformers.git 
+    pip install git+https://github.com/huggingface/transformers
 
 ENTRYPOINT ["streamlit", "run", "app.py", "model.py", "--server.port=8501", "--server.address=0.0.0.0"]

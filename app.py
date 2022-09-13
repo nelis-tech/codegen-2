@@ -6,7 +6,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 #Load model
-model, tokenizer, device = load_model()
+model, tokenizer = load_model()
 
 
 def infer(input_ids, max_length, temperature):
@@ -26,11 +26,11 @@ st.subheader("This machine learning model is trained on 16 billion parameters an
 text_target = st.text_area(label = "Enter your instruction and leave the answer open for the generated code, if you want to set the parameters or a new prompt please press stop top right, set the parameters and rerun", value ="""Instruction: Generate python code for a diffusion model
 Answer:""", height = 300)
 max_length = st.sidebar.slider("Max Length", min_value = 500, max_value=3000)
-temperature = st.sidebar.slider("Temperature", value = 0.9, min_value = 0.0, max_value=1.0, step=0.05)
+temperature = st.sidebar.slider("Temperature", value = 0.9, min_value = 0.0, max_value=1.0, step=0.1)
 
 #Generate
 with st.spinner("AI is at work......"):
-    input_ids = tokenizer(text=text_target, return_tensors="pt").input_ids.to(device)
+    input_ids = tokenizer(text=text_target, return_tensors="pt").input_ids
     output_sequences = infer(input_ids, max_length, temperature)
     generated_ids = model.generate(output_sequences)
     generated_text = tokenizer.decode(generated_ids[0])
