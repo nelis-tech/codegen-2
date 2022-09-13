@@ -2,7 +2,7 @@
 
 FROM python:3.9-slim
 
-EXPOSE 8500
+EXPOSE 8501
 
 WORKDIR /app
 
@@ -20,4 +20,4 @@ RUN pip install torch \
     pip install sentencepiece \
     pip install git+https://github.com/huggingface/transformers.git 
 
-ENTRYPOINT ["streamlit", "run", "app.py", "model.py", "--server.port=8500", "--server.address=0.0.0.0"]
+ENTRYPOINT ["streamlit", "run", "app.py", "model.py", "--server.port=8501", "--server.address=0.0.0.0"]
