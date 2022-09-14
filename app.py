@@ -13,7 +13,7 @@ def infer(input_ids, max_length, temperature):
 
     output_sequences = model.generate(
         input_ids=input_ids,
-        max_length=max_length,
+        max_length=1000,
         temperature=temperature,
         do_sample=True,
     )
@@ -25,8 +25,8 @@ st.subheader("This machine learning model is trained on 16 billion parameters an
 
 text_target = st.text_area(label = "Enter your instruction and leave the answer open for the generated code, if you want to set the parameters or a new prompt please press stop top right, set the parameters and rerun", value ="""Instruction: Generate python code for a diffusion model
 Answer:""", height = 300)
-max_length = st.sidebar.slider("Max Length", min_value = 500, max_value=3000)
-temperature = st.sidebar.slider("Temperature", value = 0.9, min_value = 0.0, max_value=1.0, step=0.1)
+temperature = st.slider("Temperature", value = 0.9, min_value = 0.0, max_value=1.0, step=0.1)
+max_length = 1000
 
 #Generate
 with st.spinner("AI is at work......"):
